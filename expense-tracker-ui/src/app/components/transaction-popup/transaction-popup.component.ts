@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Transaction } from 'src/app/models/transaction';
+import { TransactionService } from 'src/app/services/transaction.service';
 
 @Component({
     selector: 'app-transaction-popup',
@@ -17,13 +19,17 @@ export class TransactionPopupComponent implements OnInit {
         note: null
     });
 
-    constructor(private formBuilder: FormBuilder) { }
+    constructor(
+        private formBuilder: FormBuilder,
+        private transactionService: TransactionService) { }
 
     ngOnInit(): void { }
 
     saveTransaction(): void {
         if (this.transactionForm.invalid) return;
-        console.log(this.transactionForm.value);
+        const transaction: Transaction = { ...this.transactionForm.value };
+        this.transactionService.createTransaction(transaction).subscribe(
+            res => console.log(res));
     }
 
 }
