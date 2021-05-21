@@ -1,0 +1,39 @@
+<div class="title">
+    <h1 mat-dialog-title>Create Transaction</h1>
+    <span class="spacer"></span>
+    <button mat-icon-button mat-dialog-close class="close-button">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<div class="content">
+    <form [formGroup]="transactionForm" (submit)="saveTransaction()">
+        <mat-form-field>
+            <mat-label>Amount</mat-label>
+            <input matInput formControlName="amount">
+            <mat-error *ngIf="transactionForm.get('amount').hasError('required')">
+                Please enter an amount
+            </mat-error>
+            <mat-error *ngIf="transactionForm.get('amount').hasError('pattern')">
+                Please enter a valid number
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>Please select a date</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Note (Optional)</mat-label>
+            <input matInput formControlName="note">
+        </mat-form-field>
+
+        <button mat-fab color="primary">
+            <mat-icon>save</mat-icon>
+        </button>
+    </form>
+</div>

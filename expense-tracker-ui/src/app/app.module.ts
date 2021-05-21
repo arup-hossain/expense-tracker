@@ -6,19 +6,55 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
+import { TransactionPopupComponent } from './components/transaction-popup/transaction-popup.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogConfig, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent
+        HeaderComponent,
+        TransactionListComponent,
+        TransactionPopupComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
-    providers: [],
+    providers: [
+        {
+            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {
+                appearance: 'outline',
+                floatLabel: 'always'
+            }
+        },
+        {
+            provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {
+                ...new MatDialogConfig(),
+                width: '400px',
+                autoFocus: false,
+                disableClose: true,
+                panelClass: 'popup'
+            } as MatDialogConfig
+        }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

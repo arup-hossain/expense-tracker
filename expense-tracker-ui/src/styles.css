@@ -1,4 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --background-color: #673ab7;
+    --color: #fff;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.popup .mat-dialog-container {
+    padding: 0px;
+}
+
+.popup .mat-dialog-title {
+    margin-bottom: 0;
+}
+
+.popup .title {
+    display: flex;
+    background-color: var(--background-color);
+    color: var(--color);
+    padding: 18px 24px;
+}
+
+.popup .close-button {
+    margin-top: -4px;
+    margin-right: -10px;
+}
+
+.popup .content {
+    text-align: center;
+    padding: 24px;
+}
+
+.popup mat-form-field {
+    width: 100%;
+}

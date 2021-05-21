@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+    { path: '', component: TransactionListComponent },
+    { path: 'transaction-list', component: TransactionListComponent }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }
