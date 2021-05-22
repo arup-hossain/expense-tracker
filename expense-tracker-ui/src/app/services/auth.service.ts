@@ -55,4 +55,8 @@ export class AuthService {
         this.handleLogin(token);
     }
 
+    getToken(): string {
+        return this.token;
+    }
+
 }
