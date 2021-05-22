@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Transaction } from 'src/app/models/transaction';
+import { TransactionService } from 'src/app/services/transaction.service';
 import { TransactionPopupComponent } from '../transaction-popup/transaction-popup.component';
 
 @Component({
@@ -9,12 +11,23 @@ import { TransactionPopupComponent } from '../transaction-popup/transaction-popu
 })
 export class TransactionListComponent implements OnInit {
 
-    constructor(private dialog: MatDialog) { }
+    transactions: Transaction[] = [];
 
-    ngOnInit(): void { }
+    constructor(
+        private dialog: MatDialog,
+        private transactionService: TransactionService) { }
+
+    ngOnInit(): void {
+        this.getTransactions();
+    }
 
     openPopup(): void {
         this.dialog.open(TransactionPopupComponent);
+    }
+
+    getTransactions(): void {
+        this.transactionService.getTransactions().subscribe(
+            res => this.transactions = res);
     }
 
 }

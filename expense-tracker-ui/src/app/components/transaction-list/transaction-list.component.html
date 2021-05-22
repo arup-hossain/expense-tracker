@@ -1,3 +1,11 @@
 <button mat-flat-button color="primary" (click)="openPopup()" class="create-button">
     CREATE TRANSACTION
 </button>
+
+<div class="transactions">
+    <mat-card *ngFor="let transaction of transactions">
+        <p>{{ transaction.amount }}</p>
+        <p>{{ transaction.date | date: 'MM/dd/yyyy' }}</p>
+        <p>{{ transaction.note }}</p>
+    </mat-card>
+</div>

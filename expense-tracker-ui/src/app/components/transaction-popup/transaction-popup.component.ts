@@ -28,8 +28,7 @@ export class TransactionPopupComponent implements OnInit {
     saveTransaction(): void {
         if (this.transactionForm.invalid) return;
         const transaction: Transaction = { ...this.transactionForm.value };
-        this.transactionService.createTransaction(transaction).subscribe(
-            res => console.log(res));
+        this.transactionService.createTransaction(transaction).subscribe();
     }
 
 }

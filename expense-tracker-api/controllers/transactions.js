@@ -6,3 +6,8 @@ exports.createTransaction = asyncHandler(async (req, res, next) => {
     const transaction = await Transaction.create(req.body);
     res.status(201).json(transaction);
 });
+
+exports.getTransactions = asyncHandler(async (req, res, next) => {
+    const transactions = await Transaction.find();
+    res.status(200).json(transactions);
+});

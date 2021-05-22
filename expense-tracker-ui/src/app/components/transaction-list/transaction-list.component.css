@@ -2,3 +2,8 @@
     display: block;
     margin: 25px auto;
 }
+
+.transactions {
+    width: 400px;
+    margin: auto;
+}
