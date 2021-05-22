@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { RegisterComponent } from './components/register/register.component';
         HeaderComponent,
         TransactionListComponent,
         TransactionPopupComponent,
-        RegisterComponent
+        RegisterComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,

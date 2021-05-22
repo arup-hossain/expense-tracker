@@ -16,4 +16,9 @@ export class AuthService {
             res => console.log(res));
     }
 
+    login(data: { email: string, password: string }): void {
+        this.http.post<string>(this.apiUrl + '/login', data).subscribe(
+            res => console.log(res));
+    }
+
 }
