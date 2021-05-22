@@ -7,6 +7,7 @@ const app = express();
 const errorHandler = require('./middlewares/errorHandler');
 
 const transactionsRoute = require('./routes/transactions');
+const authRoute = require('./routes/auth');
 
 app.use(express.json());
 app.use(cors());
@@ -26,6 +27,7 @@ const connectToDatabase = (async () => {
 })();
 
 app.use('/api/transactions', transactionsRoute);
+app.use('/api/auth', authRoute);
 
 app.use(errorHandler);
 
