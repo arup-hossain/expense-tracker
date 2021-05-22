@@ -18,13 +18,15 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent,
         TransactionListComponent,
-        TransactionPopupComponent
+        TransactionPopupComponent,
+        RegisterComponent
     ],
     imports: [
         BrowserModule,
