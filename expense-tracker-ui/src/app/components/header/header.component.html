@@ -1,1 +1,7 @@
-<mat-toolbar color="primary">Expense Tracker</mat-toolbar>
+<mat-toolbar color="primary">
+    <span>Expense Tracker</span>
+    <span class="spacer"></span>
+    <button mat-icon-button *ngIf="authenticated" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>
