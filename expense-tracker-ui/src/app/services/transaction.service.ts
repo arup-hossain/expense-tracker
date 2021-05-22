@@ -21,4 +21,16 @@ export class TransactionService {
         return this.http.get<Transaction[]>(this.apiUrl);
     }
 
+    getTransaction(id: string): Observable<Transaction> {
+        return this.http.get<Transaction>(this.apiUrl + '/' + id);
+    }
+
+    updateTransaction(id: string, transaction: Transaction): Observable<Transaction> {
+        return this.http.put<Transaction>(this.apiUrl + '/' + id, transaction);
+    }
+
+    deleteTransaction(id: string): Observable<Transaction> {
+        return this.http.delete<Transaction>(this.apiUrl + '/' + id);
+    }
+
 }

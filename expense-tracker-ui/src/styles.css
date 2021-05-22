@@ -38,3 +38,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .popup mat-form-field {
     width: 100%;
 }
+
+.popup .mat-fab {
+    margin: 0 8px;
+}

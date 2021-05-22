@@ -11,3 +11,18 @@ exports.getTransactions = asyncHandler(async (req, res, next) => {
     const transactions = await Transaction.find();
     res.status(200).json(transactions);
 });
+
+exports.getTransaction = asyncHandler(async (req, res, next) => {
+    const transaction = await Transaction.findById(req.params.id);
+    res.status(200).json(transaction);
+});
+
+exports.updateTransaction = asyncHandler(async (req, res, next) => {
+    const transaction = await Transaction.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.status(200).json(transaction);
+});
+
+exports.deleteTransaction = asyncHandler(async (req, res, next) => {
+    const transaction = await Transaction.findByIdAndDelete(req.params.id);
+    res.status(200).json(transaction);
+});

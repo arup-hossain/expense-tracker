@@ -21,8 +21,10 @@ export class TransactionListComponent implements OnInit {
         this.getTransactions();
     }
 
-    openPopup(): void {
-        this.dialog.open(TransactionPopupComponent);
+    openPopup(mode: string, id?: string): void {
+        this.dialog.open(TransactionPopupComponent, {
+            data: { mode, id }
+        });
     }
 
     getTransactions(): void {

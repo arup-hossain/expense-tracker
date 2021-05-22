@@ -1,5 +1,6 @@
 <div class="title">
-    <h1 mat-dialog-title>Create Transaction</h1>
+    <h1 mat-dialog-title *ngIf="data.mode === 'create'">Create Transaction</h1>
+    <h1 mat-dialog-title *ngIf="data.mode === 'update'">Update Transaction</h1>
     <span class="spacer"></span>
     <button mat-icon-button mat-dialog-close class="close-button">
         <mat-icon>close</mat-icon>
@@ -34,6 +35,9 @@
 
         <button mat-fab color="primary">
             <mat-icon>save</mat-icon>
+        </button>
+        <button mat-fab color="warn" type="button" *ngIf="data.mode === 'update'" (click)="deleteTransaction()">
+            <mat-icon>delete</mat-icon>
         </button>
     </form>
 </div>
