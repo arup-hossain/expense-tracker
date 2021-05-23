@@ -18,20 +18,23 @@ export class AuthService {
         private router: Router) { }
 
     register(data: { email: string, password: string }): void {
-        this.http.post<string>(this.apiUrl + '/register', data).subscribe(
-            res => this.handleLogin(res));
+        this.http.post<string>(this.apiUrl + '/register', data).subscribe(res => {
+            this.handleLogin(res);
+            this.router.navigate(['/']);
+        });
     }
 
     login(data: { email: string, password: string }): void {
-        this.http.post<string>(this.apiUrl + '/login', data).subscribe(
-            res => this.handleLogin(res));
+        this.http.post<string>(this.apiUrl + '/login', data).subscribe(res => {
+            this.handleLogin(res);
+            this.router.navigate(['/']);
+        });
     }
 
     handleLogin(token: string): void {
         this.token = token;
         this.triggerAuthObs();
         localStorage.setItem('token', token);
-        this.router.navigate(['/']);
     }
 
     getAuthObs(): Observable<boolean> {

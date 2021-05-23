@@ -23,6 +23,9 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { NotifierModule } from 'angular-notifier';
+import { CategoryListComponent } from './components/category-list/category-list.component';
+import { CategoryPopupComponent } from './components/category-popup/category-popup.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
     declarations: [
@@ -31,7 +34,9 @@ import { NotifierModule } from 'angular-notifier';
         TransactionListComponent,
         TransactionPopupComponent,
         RegisterComponent,
-        LoginComponent
+        LoginComponent,
+        CategoryListComponent,
+        CategoryPopupComponent
     ],
     imports: [
         BrowserModule,
@@ -48,7 +53,8 @@ import { NotifierModule } from 'angular-notifier';
         MatNativeDateModule,
         HttpClientModule,
         MatCardModule,
-        NotifierModule
+        NotifierModule,
+        MatMenuModule
     ],
     providers: [
         {

@@ -1,4 +1,11 @@
 <mat-toolbar color="primary">
+    <button mat-icon-button [matMenuTriggerFor]="navigationMenu" *ngIf="authenticated">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #navigationMenu="matMenu">
+        <a mat-menu-item routerLink="/transaction-list">Transactions</a>
+        <a mat-menu-item routerLink="/category-list">Categories</a>
+    </mat-menu>
     <span>Expense Tracker</span>
     <span class="spacer"></span>
     <button mat-icon-button *ngIf="authenticated" (click)="logout()">
