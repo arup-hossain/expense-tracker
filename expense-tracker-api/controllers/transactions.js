@@ -9,12 +9,16 @@ exports.createTransaction = asyncHandler(async (req, res, next) => {
 });
 
 exports.getTransactions = asyncHandler(async (req, res, next) => {
-    const transactions = await Transaction.find({ createdBy: req.userId });
+    const transactions = await Transaction
+        .find({ createdBy: req.userId })
+        .populate('category');
     res.status(200).json(transactions);
 });
 
 exports.getTransaction = asyncHandler(async (req, res, next) => {
-    const transaction = await Transaction.findById(req.params.id);
+    const transaction = await Transaction
+        .findById(req.params.id)
+        .populate('category');
     res.status(200).json(transaction);
 });
 
@@ -30,7 +34,7 @@ exports.updateTransaction = asyncHandler(async (req, res, next) => {
 exports.deleteTransaction = asyncHandler(async (req, res, next) => {
     const transaction = await Transaction.findById(req.params.id);
     if (!transaction.createdBy.equals(req.userId)) {
-        return next(createError(403, 'You cannot update this transaction'));
+        return next(createError(403, 'You cannot delete this transaction'));
     }
     await transaction.deleteOne();
     res.status(200).json(transaction);

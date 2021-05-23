@@ -4,6 +4,7 @@
 
 <div class="transactions">
     <mat-card *ngFor="let transaction of transactions" (click)="openPopup('update', transaction._id)">
+        <p>{{ transaction.category.name }}</p>
         <p>{{ transaction.amount }}</p>
         <p>{{ transaction.date | date: 'MM/dd/yyyy' }}</p>
         <p>{{ transaction.note }}</p>

@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Category } from 'src/app/models/category';
 import { Transaction } from 'src/app/models/transaction';
+import { CategoryService } from 'src/app/services/category.service';
 import { TransactionService } from 'src/app/services/transaction.service';
 
 @Component({
@@ -12,6 +14,7 @@ import { TransactionService } from 'src/app/services/transaction.service';
 export class TransactionPopupComponent implements OnInit {
 
     transactionForm: FormGroup = this.formBuilder.group({
+        category: [null, Validators.required],
         amount: [null, [
             Validators.required,
             Validators.pattern('^[1-9][0-9]*$')
@@ -19,14 +22,17 @@ export class TransactionPopupComponent implements OnInit {
         date: [null, Validators.required],
         note: null
     });
+    categories: Category[] = [];
 
     constructor(
         private formBuilder: FormBuilder,
         private transactionService: TransactionService,
-        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private categoryService: CategoryService) { }
 
     ngOnInit(): void {
         this.getTransaction();
+        this.getCategories();
     }
 
     saveTransaction(): void {
@@ -47,6 +53,15 @@ export class TransactionPopupComponent implements OnInit {
 
     deleteTransaction(): void {
         this.transactionService.deleteTransaction(this.data.id).subscribe();
+    }
+
+    getCategories(): void {
+        this.categoryService.getCategories().subscribe(
+            res => this.categories = res);
+    }
+
+    categoryCompareWith(c1: Category, c2: Category): boolean {
+        return c1 && c2 && c1._id === c2._id;
     }
 
 }

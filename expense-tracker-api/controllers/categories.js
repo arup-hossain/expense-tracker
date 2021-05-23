@@ -9,7 +9,7 @@ exports.createCategory = asyncHandler(async (req, res, next) => {
 });
 
 exports.getCategories = asyncHandler(async (req, res, next) => {
-    const categories = await Category.find();
+    const categories = await Category.find({ createdBy: req.userId });
     res.status(200).json(categories);
 });
 
@@ -30,7 +30,7 @@ exports.updateCategory = asyncHandler(async (req, res, next) => {
 exports.deleteCategory = asyncHandler(async (req, res, next) => {
     const category = await Category.findById(req.params.id);
     if (!category.createdBy.equals(req.userId)) {
-        return next(createError(403, 'You cannot update this category'));
+        return next(createError(403, 'You cannot delete this category'));
     }
     await category.deleteOne();
     res.status(200).json(category);

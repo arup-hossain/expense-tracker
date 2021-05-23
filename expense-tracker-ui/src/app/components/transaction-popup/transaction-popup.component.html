@@ -10,6 +10,16 @@
 <div class="content">
     <form [formGroup]="transactionForm" (submit)="saveTransaction()">
         <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category" [compareWith]="categoryCompareWith">
+                <mat-option *ngFor="let category of categories" [value]="category">
+                    {{ category.name }}
+                </mat-option>
+            </mat-select>
+            <mat-error>Please select a category</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
             <mat-label>Amount</mat-label>
             <input matInput formControlName="amount">
             <mat-error *ngIf="transactionForm.get('amount').hasError('required')">
