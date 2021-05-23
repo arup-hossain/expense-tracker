@@ -26,6 +26,7 @@ import { NotifierModule } from 'angular-notifier';
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { CategoryPopupComponent } from './components/category-popup/category-popup.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { MatMenuModule } from '@angular/material/menu';
         HttpClientModule,
         MatCardModule,
         NotifierModule,
-        MatMenuModule
+        MatMenuModule,
+        MatSelectModule
     ],
     providers: [
         {

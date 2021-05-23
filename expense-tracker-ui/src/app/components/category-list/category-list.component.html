@@ -1,1 +1,10 @@
-<p>category-list works!</p>
+<button mat-flat-button color="primary" (click)="openPopup('create')" class="create-button">
+    CREATE CATEGPRY
+</button>
+
+<div class="categories">
+    <mat-card *ngFor="let category of categories" (click)="openPopup('update', category._id)">
+        <p>{{ category.name }}</p>
+        <p>{{ category.type }}</p>
+    </mat-card>
+</div>

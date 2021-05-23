@@ -9,6 +9,7 @@ const authenticate = require('./middlewares/authenticate');
 
 const transactionsRoute = require('./routes/transactions');
 const authRoute = require('./routes/auth');
+const categoriesRoute = require('./routes/categories');
 
 app.use(express.json());
 app.use(cors());
@@ -31,6 +32,7 @@ app.use('/api/auth', authRoute);
 app.use(authenticate);
 
 app.use('/api/transactions', transactionsRoute);
+app.use('/api/categories', categoriesRoute);
 
 app.use(errorHandler);
 
