@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
-    { path: '', component: TransactionListComponent },
-    { path: 'transaction-list', component: TransactionListComponent }
+    { path: '', component: TransactionListComponent, canActivate: [AuthGuard] },
+    { path: 'transaction-list', component: TransactionListComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
