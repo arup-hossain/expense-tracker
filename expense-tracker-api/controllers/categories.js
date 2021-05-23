@@ -9,7 +9,10 @@ exports.createCategory = asyncHandler(async (req, res, next) => {
 });
 
 exports.getCategories = asyncHandler(async (req, res, next) => {
-    const categories = await Category.find({ createdBy: req.userId });
+    const categories = await Category.find({
+        createdBy: req.userId,
+        type: req.query.type
+    });
     res.status(200).json(categories);
 });
 

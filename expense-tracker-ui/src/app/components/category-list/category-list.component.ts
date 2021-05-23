@@ -11,7 +11,8 @@ import { CategoryPopupComponent } from '../category-popup/category-popup.compone
 })
 export class CategoryListComponent implements OnInit {
 
-    categories: Category[] = [];
+    expenseCategories: Category[] = [];
+    incomeCategories: Category[] = [];
 
     constructor(
         private dialog: MatDialog,
@@ -28,8 +29,10 @@ export class CategoryListComponent implements OnInit {
     }
 
     getCategories(): void {
-        this.categoryService.getCategories().subscribe(
-            res => this.categories = res);
+        this.categoryService.getCategories('Expense').subscribe(
+            res => this.expenseCategories = res);
+        this.categoryService.getCategories('Income').subscribe(
+            res => this.incomeCategories = res);
     }
 
 }

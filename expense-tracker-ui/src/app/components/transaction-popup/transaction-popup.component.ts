@@ -22,7 +22,7 @@ export class TransactionPopupComponent implements OnInit {
         date: [null, Validators.required],
         note: null
     });
-    categories: Category[] = [];
+    categoryGroups: Object[] = [];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -56,8 +56,18 @@ export class TransactionPopupComponent implements OnInit {
     }
 
     getCategories(): void {
-        this.categoryService.getCategories().subscribe(
-            res => this.categories = res);
+        this.categoryService.getCategories('Expense').subscribe(res => {
+            this.categoryGroups.push({
+                name: 'Expense',
+                categories: res
+            })
+        });
+        this.categoryService.getCategories('Income').subscribe(res => {
+            this.categoryGroups.push({
+                name: 'Income',
+                categories: res
+            })
+        });
     }
 
     categoryCompareWith(c1: Category, c2: Category): boolean {
