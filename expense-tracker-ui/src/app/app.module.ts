@@ -21,6 +21,8 @@ import { MatCardModule } from '@angular/material/card';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { NotifierModule } from 'angular-notifier';
 
 @NgModule({
     declarations: [
@@ -45,7 +47,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
         MatDatepickerModule,
         MatNativeDateModule,
         HttpClientModule,
-        MatCardModule
+        MatCardModule,
+        NotifierModule
     ],
     providers: [
         {
@@ -66,6 +69,11 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ErrorInterceptor,
             multi: true
         }
     ],
