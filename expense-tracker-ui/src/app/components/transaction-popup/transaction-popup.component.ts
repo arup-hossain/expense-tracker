@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NotifierService } from 'angular-notifier';
 import { Category } from 'src/app/models/category';
 import { Transaction } from 'src/app/models/transaction';
 import { CategoryService } from 'src/app/services/category.service';
@@ -28,7 +29,9 @@ export class TransactionPopupComponent implements OnInit {
         private formBuilder: FormBuilder,
         private transactionService: TransactionService,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private categoryService: CategoryService) { }
+        private categoryService: CategoryService,
+        private notifier: NotifierService,
+        private dialogRef: MatDialogRef<TransactionPopupComponent>) { }
 
     ngOnInit(): void {
         this.getTransaction();
@@ -39,9 +42,15 @@ export class TransactionPopupComponent implements OnInit {
         if (this.transactionForm.invalid) return;
         const transaction: Transaction = { ...this.transactionForm.value };
         if (this.data.mode === 'create') {
-            this.transactionService.createTransaction(transaction).subscribe();
+            this.transactionService.createTransaction(transaction).subscribe(() => {
+                this.notifier.notify('success', 'Transaction created successfully');
+                this.close();
+            });
         } else {
-            this.transactionService.updateTransaction(this.data.id, transaction).subscribe();
+            this.transactionService.updateTransaction(this.data.id, transaction).subscribe(() => {
+                this.notifier.notify('success', 'Transaction updated successfully');
+                this.close();
+            });
         }
     }
 
@@ -52,7 +61,10 @@ export class TransactionPopupComponent implements OnInit {
     }
 
     deleteTransaction(): void {
-        this.transactionService.deleteTransaction(this.data.id).subscribe();
+        this.transactionService.deleteTransaction(this.data.id).subscribe(() => {
+            this.notifier.notify('success', 'Transaction deleted successfully');
+            this.close();
+        });
     }
 
     getCategories(): void {
@@ -72,6 +84,10 @@ export class TransactionPopupComponent implements OnInit {
 
     categoryCompareWith(c1: Category, c2: Category): boolean {
         return c1 && c2 && c1._id === c2._id;
+    }
+
+    close(): void {
+        this.dialogRef.close();
     }
 
 }

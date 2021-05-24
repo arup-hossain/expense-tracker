@@ -28,9 +28,9 @@ export class TransactionListComponent implements OnInit {
     }
 
     openPopup(mode: string, id?: string): void {
-        this.dialog.open(TransactionPopupComponent, {
-            data: { mode, id }
-        });
+        this.dialog
+            .open(TransactionPopupComponent, { data: { mode, id } })
+            .afterClosed().subscribe(() => this.getTransactions());
     }
 
     getTransactions(): void {

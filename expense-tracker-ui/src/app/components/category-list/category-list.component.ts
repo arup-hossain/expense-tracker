@@ -23,9 +23,9 @@ export class CategoryListComponent implements OnInit {
     }
 
     openPopup(mode: string, id?: string): void {
-        this.dialog.open(CategoryPopupComponent, {
-            data: { mode, id }
-        });
+        this.dialog
+            .open(CategoryPopupComponent, { data: { mode, id } })
+            .afterClosed().subscribe(() => this.getCategories());
     }
 
     getCategories(): void {

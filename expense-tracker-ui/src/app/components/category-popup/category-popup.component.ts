@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NotifierService } from 'angular-notifier';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 
@@ -19,7 +20,9 @@ export class CategoryPopupComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private categoryService: CategoryService,
-        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private notifier: NotifierService,
+        private dialogRef: MatDialogRef<CategoryPopupComponent>) { }
 
     ngOnInit(): void {
         this.getCategory();
@@ -29,9 +32,15 @@ export class CategoryPopupComponent implements OnInit {
         if (this.categoryForm.invalid) return;
         const category: Category = { ...this.categoryForm.value };
         if (this.data.mode === 'create') {
-            this.categoryService.createCategory(category).subscribe();
+            this.categoryService.createCategory(category).subscribe(() => {
+                this.notifier.notify('success', 'Category created successfully');
+                this.close();
+            });
         } else {
-            this.categoryService.updateCategory(this.data.id, category).subscribe();
+            this.categoryService.updateCategory(this.data.id, category).subscribe(() => {
+                this.notifier.notify('success', 'Category updated successfully');
+                this.close();
+            });
         }
     }
 
@@ -42,7 +51,14 @@ export class CategoryPopupComponent implements OnInit {
     }
 
     deleteCategory(): void {
-        this.categoryService.deleteCategory(this.data.id).subscribe();
+        this.categoryService.deleteCategory(this.data.id).subscribe(() => {
+            this.notifier.notify('success', 'Category deleted successfully');
+            this.close();
+        });
+    }
+
+    close(): void {
+        this.dialogRef.close();
     }
 
 }
