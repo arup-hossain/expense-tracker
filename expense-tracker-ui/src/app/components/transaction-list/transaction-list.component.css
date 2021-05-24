@@ -1,9 +1,54 @@
 .create-button {
-    display: block;
-    margin: 25px auto;
+    margin-top: 3px;
 }
 
 .transactions {
     width: 400px;
     margin: auto;
+}
+
+.controls-container {
+    display: flex;
+    width: 400px;
+    margin: 20px auto;
+}
+
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 10px 0;
+}
+
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+}
+
+.count-text {
+    color: grey;
+}
+
+mat-card-title {
+    display: flex;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+mat-card > p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+mat-card {
+    margin-bottom: 3px;
+    padding: 12px;
+}
+
+.expense-amount {
+    color: #cc0000;
+}
+
+.income-amount {
+    color: green;
 }

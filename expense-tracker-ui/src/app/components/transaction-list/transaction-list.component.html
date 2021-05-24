@@ -1,23 +1,42 @@
-<button mat-flat-button color="primary" (click)="openPopup('create')" class="create-button">
-    CREATE TRANSACTION
-</button>
+<div class="controls-container">
+    <button mat-mini-fab color="primary" (click)="openPopup('create')" class="create-button">
+        <mat-icon>add</mat-icon>
+    </button>
 
-<mat-form-field>
-    <mat-label>Categories</mat-label>
-    <mat-select [(value)]="categories" (selectionChange)="getTransactions()" multiple>
-        <mat-optgroup *ngFor="let group of categoryGroups" [label]="group.name">
-            <mat-option *ngFor="let category of group.categories" [value]="category._id">
-                {{ category.name }}
-            </mat-option>
-        </mat-optgroup>
-    </mat-select>
-</mat-form-field>
+    <span class="spacer"></span>
+
+    <mat-form-field>
+        <mat-label>Categories</mat-label>
+        <mat-select [(value)]="categories" (selectionChange)="getTransactions()" multiple>
+            <mat-select-trigger>
+                {{ categories.length > 0 ? categories[0].name : '' }}
+                <span *ngIf="categories.length > 1" class="count-text">
+                    (+{{categories.length - 1}} {{categories.length === 2 ? 'other' : 'others'}})
+                </span>
+            </mat-select-trigger>
+
+            <mat-optgroup *ngFor="let group of categoryGroups" [label]="group.name">
+                <mat-option *ngFor="let category of group.categories" [value]="category">
+                    {{ category.name }}
+                </mat-option>
+            </mat-optgroup>
+        </mat-select>
+    </mat-form-field>
+</div>
 
 <div class="transactions">
     <mat-card *ngFor="let transaction of transactions" (click)="openPopup('update', transaction._id)">
-        <p>{{ transaction.category.name }}</p>
-        <p>{{ transaction.amount }}</p>
+        <mat-card-title>
+            <span>{{ transaction.category.name }}</span>
+            <span class="spacer"></span>
+            <span *ngIf="transaction.category.type === 'Expense'" class="expense-amount">
+                -{{ transaction.amount }}
+            </span>
+            <span *ngIf="transaction.category.type === 'Income'" class="income-amount">
+                +{{ transaction.amount }}
+            </span>
+        </mat-card-title>
         <p>{{ transaction.date | date: 'MM/dd/yyyy' }}</p>
-        <p>{{ transaction.note }}</p>
+        <p *ngIf="transaction.note">{{ transaction.note }}</p>
     </mat-card>
 </div>

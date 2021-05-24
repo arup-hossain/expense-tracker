@@ -34,6 +34,7 @@ export class TransactionListComponent implements OnInit {
     }
 
     getTransactions(): void {
+        console.log(this.categories[0]);
         this.transactionService.getTransactions(this.categories).subscribe(
             res => this.transactions = res);
     }
