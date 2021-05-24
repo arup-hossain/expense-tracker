@@ -2,20 +2,28 @@
     CREATE CATEGPRY
 </button>
 
-<h3>Expenses</h3>
-<div class="categories">
-    <mat-card *ngFor="let category of expenseCategories" (click)="openPopup('update', category._id)">
-        <p>{{ category.name }}</p>
-        <p>{{ category.type }}</p>
-        <p>{{ category.numTransactions }} Transactions</p>
-    </mat-card>
-</div>
+<div class="categories-container">
+    <div class="expense-section">
+        <h3>Expense</h3>
+        <div class="categories">
+            <mat-card *ngFor="let category of expenseCategories" (click)="openPopup('update', category._id)">
+                <span>{{ category.name }}</span>
+                <span class="spacer"></span>
+                <span class="count-text">{{ category.numTransactions }} Transaction</span>
+                <span *ngIf="category.numTransactions > 1" class="count-text">s</span>
+            </mat-card>
+        </div>
+    </div>
 
-<h3>Income</h3>
-<div class="categories">
-    <mat-card *ngFor="let category of incomeCategories" (click)="openPopup('update', category._id)">
-        <p>{{ category.name }}</p>
-        <p>{{ category.type }}</p>
-        <p>{{ category.numTransactions }} Transactions</p>
-    </mat-card>
+    <div class="income-section">
+        <h3>Income</h3>
+        <div class="categories">
+            <mat-card *ngFor="let category of incomeCategories" (click)="openPopup('update', category._id)">
+                <span>{{ category.name }}</span>
+                <span class="spacer"></span>
+                <span class="count-text">{{ category.numTransactions }} Transaction</span>
+                <span *ngIf="category.numTransactions > 1" class="count-text">s</span>
+            </mat-card>
+        </div>
+    </div>
 </div>
