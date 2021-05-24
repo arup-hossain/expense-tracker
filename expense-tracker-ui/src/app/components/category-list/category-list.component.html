@@ -7,6 +7,7 @@
     <mat-card *ngFor="let category of expenseCategories" (click)="openPopup('update', category._id)">
         <p>{{ category.name }}</p>
         <p>{{ category.type }}</p>
+        <p>{{ category.numTransactions }} Transactions</p>
     </mat-card>
 </div>
 
@@ -15,5 +16,6 @@
     <mat-card *ngFor="let category of incomeCategories" (click)="openPopup('update', category._id)">
         <p>{{ category.name }}</p>
         <p>{{ category.type }}</p>
+        <p>{{ category.numTransactions }} Transactions</p>
     </mat-card>
 </div>

@@ -15,6 +15,19 @@ const categorySchema = mongoose.Schema({
         ref: 'User',
         required: true
     }
+}, {
+    toJSON: { virtuals: true }
+});
+
+categorySchema.pre('deleteOne', { document: true }, async function () {
+    await this.model('Transaction').deleteMany({ category: this._id });
+});
+
+categorySchema.virtual('numTransactions', {
+    ref: 'Transaction',
+    localField: '_id',
+    foreignField: 'category',
+    count: true
 });
 
 module.exports = mongoose.model('Category', categorySchema);
