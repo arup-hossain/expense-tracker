@@ -7,3 +7,8 @@ form {
 mat-form-field {
     width: 100%;
 }
+
+p {
+    text-align: center;
+    margin-top: 25px;
+}

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -15,11 +16,13 @@ export class AuthService {
 
     constructor(
         private http: HttpClient,
-        private router: Router) { }
+        private router: Router,
+        private notifier: NotifierService) { }
 
     register(data: { email: string, password: string }): void {
         this.http.post<string>(this.apiUrl + '/register', data).subscribe(res => {
             this.handleLogin(res);
+            this.notifier.notify('success', 'Account created successfully');
             this.router.navigate(['/']);
         });
     }
