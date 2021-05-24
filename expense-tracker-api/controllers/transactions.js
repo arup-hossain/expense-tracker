@@ -9,8 +9,12 @@ exports.createTransaction = asyncHandler(async (req, res, next) => {
 });
 
 exports.getTransactions = asyncHandler(async (req, res, next) => {
+    const filters = { createdBy: req.userId };
+    if (req.query.categories) {
+        filters.category = { $in: req.query.categories.split(',') }
+    }
     const transactions = await Transaction
-        .find({ createdBy: req.userId })
+        .find(filters)
         .populate('category');
     res.status(200).json(transactions);
 });

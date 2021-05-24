@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Category } from '../models/category';
 import { Transaction } from '../models/transaction';
 
 @Injectable({
@@ -17,8 +18,14 @@ export class TransactionService {
         return this.http.post<Transaction>(this.apiUrl, transaction);
     }
 
-    getTransactions(): Observable<Transaction[]> {
-        return this.http.get<Transaction[]>(this.apiUrl);
+    getTransactions(categories: Category[]): Observable<Transaction[]> {
+        let query = '?';
+        if (categories.length > 0) {
+            query += 'categories=';
+            query += categories.join(',');
+            console.log(query);
+        }
+        return this.http.get<Transaction[]>(this.apiUrl + query);
     }
 
     getTransaction(id: string): Observable<Transaction> {

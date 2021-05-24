@@ -2,6 +2,17 @@
     CREATE TRANSACTION
 </button>
 
+<mat-form-field>
+    <mat-label>Categories</mat-label>
+    <mat-select [(value)]="categories" (selectionChange)="getTransactions()" multiple>
+        <mat-optgroup *ngFor="let group of categoryGroups" [label]="group.name">
+            <mat-option *ngFor="let category of group.categories" [value]="category._id">
+                {{ category.name }}
+            </mat-option>
+        </mat-optgroup>
+    </mat-select>
+</mat-form-field>
+
 <div class="transactions">
     <mat-card *ngFor="let transaction of transactions" (click)="openPopup('update', transaction._id)">
         <p>{{ transaction.category.name }}</p>
