@@ -24,7 +24,6 @@ export class TransactionService {
             query += 'categories=';
             const categoryIds: string[] = categories.map(category => category._id);
             query += categoryIds.join(',');
-            console.log(query);
         }
         return this.http.get<Transaction[]>(this.apiUrl + query);
     }
